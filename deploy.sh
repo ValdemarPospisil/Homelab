@@ -20,7 +20,7 @@ if [ ! -s ".env" ]; then
     exit 1
 fi
 
-ANSIBLE_INVENTORY="ansible/inventory.ini"
+ANSIBLE_INVENTORY="${ANSIBLE_INVENTORY:-ansible/inventory.ini}"
 ANSIBLE_PLAYBOOK="ansible/setup.yml"
 
 # 1. Pull latest changes
