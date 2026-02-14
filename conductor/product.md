@@ -15,5 +15,5 @@ hey this is a homelab setup that i use on my server which is a notebook with 8gb
 - **Media Suite:** Plex for video, Audiobookshelf for audiobooks/podcasts, and Kavita for books/manga.
 - **Monitoring & Observability:** Full stack implementation using Prometheus, Grafana, and Node Exporter to track system health and resource usage.
 - **Infrastructure as Code (IaC):** Automation of host configuration and container orchestration using Ansible.
-- **Continuous Integration/Deployment (CI/CD):** Implementation of GitOps workflows to automate deployments and system updates.
+- **Continuous Integration/Deployment (CI/CD):** GitOps workflow implemented to automate deployments and host updates via Ansible and Docker Compose.
 - **Network Management:** Ad-blocking and DNS management via AdGuard Home.

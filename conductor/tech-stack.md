@@ -21,5 +21,5 @@
 - **Gaming:** Minecraft (Fabric 1.21.1)
 
 ## Development & Deployment
-- **Deployment Strategy:** GitOps (planned), Manual CLI (current)
+- **Deployment Strategy:** GitOps (Implemented via cron-triggered deploy.sh)
 - **Secrets Management:** Environment variables (.env)
