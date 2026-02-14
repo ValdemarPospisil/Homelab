@@ -12,9 +12,9 @@
 
 ## Phase 2: Automation and Triggering
 
-- [x] Task: Create a systemd service for the deployment agent [7dc71b7]
-    - [x] Write tests to verify service configuration file generation
-    - [x] Implement the systemd unit files (.service and .timer)
+- [x] Task: Create a cron job for the deployment agent [f891ab2]
+    - [x] Write tests to verify cron configuration
+    - [x] Implement the cron configuration file
 - [x] Task: Secure the deployment environment [b3fc839]
     - [x] Write tests to verify environment variable loading and permission checks
     - [x] Implement basic security checks in the deployment script
