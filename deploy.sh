@@ -14,6 +14,12 @@ log() {
     echo "$(date '+%Y-%m-%d %H:%M:%S') - $1"
 }
 
+# Security Check: Ensure .env exists and is not empty
+if [ ! -s ".env" ]; then
+    log "ERROR: .env file missing or empty. Deployment aborted." >&2
+    exit 1
+fi
+
 ANSIBLE_INVENTORY="ansible/inventory.ini"
 ANSIBLE_PLAYBOOK="ansible/setup.yml"
 
