@@ -14,6 +14,9 @@ log() {
     echo "$(date '+%Y-%m-%d %H:%M:%S') - $1"
 }
 
+ANSIBLE_INVENTORY="ansible/inventory.ini"
+ANSIBLE_PLAYBOOK="ansible/setup.yml"
+
 # 1. Pull latest changes
 log "Pulling latest changes..."
 if [ "$DRY_RUN" = true ]; then
@@ -22,7 +25,15 @@ else
     git pull origin main
 fi
 
-# 2. Deploy containers
+# 2. Run Ansible setup
+log "Running Ansible setup..."
+if [ "$DRY_RUN" = true ]; then
+    echo "[DRY RUN] Executing: ansible-playbook -i $ANSIBLE_INVENTORY $ANSIBLE_PLAYBOOK"
+else
+    ansible-playbook -i "$ANSIBLE_INVENTORY" "$ANSIBLE_PLAYBOOK"
+fi
+
+# 3. Deploy containers
 log "Deploying containers..."
 if [ "$DRY_RUN" = true ]; then
     echo "[DRY RUN] Executing: docker-compose up -d --remove-orphans"

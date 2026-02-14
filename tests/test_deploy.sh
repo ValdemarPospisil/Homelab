@@ -19,6 +19,14 @@ if [ $EXIT_CODE -ne 0 ]; then
     exit 1
 fi
 
+if [[ "$OUTPUT" == *"ansible-playbook"* ]]; then
+    echo "PASSED: ansible-playbook execution detected"
+else
+    echo "FAILED: Output did not contain 'ansible-playbook'"
+    echo "Output was: $OUTPUT"
+    exit 1
+fi
+
 if [[ "$OUTPUT" == *"DRY RUN"* ]]; then
     echo "PASSED: dry-run mode detected"
 else
