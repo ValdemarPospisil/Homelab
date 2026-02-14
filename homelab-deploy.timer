@@ -1,0 +1,10 @@
+[Unit]
+Description=Timer for Homelab Automated Deployment Service
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=1min
+Unit=homelab-deploy.service
+
+[Install]
+WantedBy=timers.target

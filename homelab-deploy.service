@@ -1,0 +1,13 @@
+[Unit]
+Description=Homelab Automated Deployment Service
+After=network.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/School/Homelab
+ExecStart=/usr/bin/bash %h/School/Homelab/deploy.sh
+User=valdemar
+Group=valdemar
+
+[Install]
+WantedBy=multi-user.target
