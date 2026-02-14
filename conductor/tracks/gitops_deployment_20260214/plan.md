@@ -12,9 +12,9 @@
 
 ## Phase 2: Automation and Triggering
 
-- [ ] Task: Create a systemd service for the deployment agent
-    - [ ] Write tests to verify service configuration file generation
-    - [ ] Implement the systemd unit files (.service and .timer)
+- [x] Task: Create a systemd service for the deployment agent [7dc71b7]
+    - [x] Write tests to verify service configuration file generation
+    - [x] Implement the systemd unit files (.service and .timer)
 - [ ] Task: Secure the deployment environment
     - [ ] Write tests to verify environment variable loading and permission checks
     - [ ] Implement basic security checks in the deployment script
