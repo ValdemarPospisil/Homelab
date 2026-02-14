@@ -38,6 +38,7 @@
           - curl
           - docker
           - docker-compose
+          - cronie
         state: present
 
     # --- 3. SLUŽBY (RUNIT) ---
@@ -45,6 +46,12 @@
       file:
         src: /etc/sv/docker
         dest: /var/service/docker
+        state: link
+
+    - name: Povolit službu Cronie (symlink pro Runit)
+      file:
+        src: /etc/sv/cronie
+        dest: /var/service/cronie
         state: link
 
     - name: Počkat na start Dockeru
@@ -84,9 +91,10 @@
       # Spustí se jen, když se změnilo repo nebo když Docker neběží
       # Můžeš to pouštět pokaždé, Docker je chytrý a pozná, co už běží.
 
-    # Příklad pro Minecraft (zatím zakomentované):
-    # Pokud bys chtěl, aby Ansible zapnul i Minecraft, odkomentuj:
-    # - name: Spustit Minecraft (Profile)
-    #   command: docker compose --profile game up -d
-    #   args:
-    #     chdir: "{{ homelab_dir }}"
+    # --- 6. AUTOMATED DEPLOYMENT ---
+    - name: Nastavit cron job pro automatický deployment
+      ansible.builtin.cron:
+        name: "Homelab Auto Deploy"
+        minute: "*"
+        user: "{{ username }}"
+        job: "/usr/bin/bash {{ homelab_dir }}/deploy.sh >> {{ homelab_dir }}/deploy.log 2>&1"
