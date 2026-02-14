@@ -69,7 +69,7 @@
       git:
         repo: "{{ repo_url }}"
         dest: "{{ homelab_dir }}"
-        force: no          # 'yes' by přepsalo tvé lokální změny, 'no' je bezpečnější
+        force: yes # 'yes' by přepsalo tvé lokální změny, 'no' je bezpečnější
         update: yes        # Stáhne novinky (git pull)
         version: main      # Nebo 'master', podle toho jak se jmenuje hlavní větev
       # Důležité: Musíme nastavit vlastníka, jinak by to patřilo rootovi!

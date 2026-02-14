@@ -197,7 +197,7 @@ services:
       - '--path.rootfs=/host'
     restart: unless-stopped
     volumes:
-      - '/:/host:ro,rslave' # Vidí celý disk hostitele (jen pro čtení)
+      - '/:/host:ro' # Vidí celý disk hostitele (jen pro čtení)
     # Node exporter nepotřebuje být na Homepage, běží na pozadí
 
   # 3. Grafana (Tvář - kreslí grafy)
@@ -206,7 +206,7 @@ services:
     container_name: grafana
     restart: unless-stopped
     ports:
-      - "3000:3000"
+      - "3002:3000"
     volumes:
       - grafana_data:/var/lib/grafana # Aby grafy nezmizely po restartu
     environment:
@@ -216,7 +216,7 @@ services:
       - "homepage.group=Monitoring"
       - "homepage.name=Grafana"
       - "homepage.icon=grafana.png"
-      - "homepage.href=http://192.168.1.31:3000"
+      - "homepage.href=http://192.168.1.31:3002"
 
 # --- VOLUMES (Na konci souboru) ---
 volumes:

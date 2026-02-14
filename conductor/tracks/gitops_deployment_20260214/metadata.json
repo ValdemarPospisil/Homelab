@@ -1,8 +1,0 @@
-{
-  "track_id": "gitops_deployment_20260214",
-  "type": "feature",
-  "status": "new",
-  "created_at": "2026-02-14T15:58:21Z",
-  "updated_at": "2026-02-14T15:58:21Z",
-  "description": "Implement a GitOps workflow for automated deployment of the Docker Compose stack."
-}
