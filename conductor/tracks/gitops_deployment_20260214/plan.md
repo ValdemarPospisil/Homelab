@@ -15,7 +15,7 @@
 - [x] Task: Create a systemd service for the deployment agent [7dc71b7]
     - [x] Write tests to verify service configuration file generation
     - [x] Implement the systemd unit files (.service and .timer)
-- [ ] Task: Secure the deployment environment
-    - [ ] Write tests to verify environment variable loading and permission checks
-    - [ ] Implement basic security checks in the deployment script
+- [x] Task: Secure the deployment environment [b3fc839]
+    - [x] Write tests to verify environment variable loading and permission checks
+    - [x] Implement basic security checks in the deployment script
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Automation and Triggering' (Protocol in workflow.md)
