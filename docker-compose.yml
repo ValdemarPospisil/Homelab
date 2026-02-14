@@ -1,6 +1,49 @@
 services:
+   dozzle:
+    image: amir20/dozzle:latest
+    container_name: dozzle
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    labels:
+      - "homepage.group=Systém"
+      - "homepage.name=Logy (Dozzle)"
+      - "homepage.icon=dozzle.png"
+      - "homepage.href=http://192.168.1.31:8080"
+
+   watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WATCHTOWER_CLEANUP=true # Smaže staré images, aby nezabíraly místo
+      - WATCHTOWER_POLL_INTERVAL=86400 # Kontrola jednou za 24h
+    restart: unless-stopped
+    labels:
+      - "homepage.group=Systém"
+      - "homepage.name=Auto-Update"
+      - "homepage.icon=watchtower.png"
+
+  # --- HOMEPAGE (Nový Dashboard) ---
+   homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    volumes:
+      - ./homepage/config:/app/config
+      - /var/run/docker.sock:/var/run/docker.sock:ro # Nutné, aby viděl ostatní kontejnery
+    ports:
+      - "3000:3000"
+    environment:
+      - HOMEPAGE_ALLOWED_HOSTS=*
+      - PUID=1000
+      - PGID=996
+    restart: unless-stopped
+
   # --- PLEX (Filmy a seriály) ---
-  plex:
+   plex:
     image: lscr.io/linuxserver/plex:latest
     container_name: plex
     network_mode: host
@@ -19,7 +62,7 @@ services:
     restart: unless-stopped
 
   # --- ADGUARD HOME ---
-  adguardhome:
+   adguardhome:
     image: adguard/adguardhome
     container_name: adguardhome
     profiles:
@@ -31,7 +74,7 @@ services:
     restart: unless-stopped
 
   # --- UPTIME KUMA ---
-  uptime-kuma:
+   uptime-kuma:
     image: louislam/uptime-kuma:1
     container_name: uptime-kuma
     ports:
@@ -41,7 +84,7 @@ services:
     restart: unless-stopped
 
   # --- CTOP ---
-  ctop:
+   ctop:
     image: quay.io/vektorlab/ctop:latest
     container_name: ctop
     restart: unless-stopped
@@ -51,7 +94,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
 
   # --- MINECRAFT ---
-  minecraft:
+   minecraft:
     image: itzg/minecraft-server
     container_name: minecraft
     profiles: 
@@ -74,7 +117,7 @@ services:
     tty: true
 
   # --- AUDIOBOOKSHELF ---
-  audiobookshelf:
+   audiobookshelf:
     image: ghcr.io/advplyr/audiobookshelf:latest
     container_name: audiobookshelf
     ports:
@@ -90,7 +133,7 @@ services:
       - GROUP_ID=1000
     restart: unless-stopped
 
-  playit:
+   playit:
     image: wisdomsky/playit-docker-web:latest
     container_name: playit
     network_mode: host      # Musí vidět síť, aby vytvořil tunel
@@ -98,7 +141,7 @@ services:
       - ./playit/data:/data
     restart: unless-stopped 
 
-  kavita:
+   kavita:
     image: jvmilazz0/kavita:latest
     container_name: kavita
     volumes:
@@ -111,7 +154,7 @@ services:
       - "5000:5000"                # Dostupne na portu 5000
     restart: unless-stopped
 
-  filebrowser:
+   filebrowser:
     image: filebrowser/filebrowser:latest
     container_name: filebrowser
     volumes:
@@ -125,7 +168,7 @@ services:
   # --- MONITORING STACK ---
 
   # 1. Prometheus (Mozek - sbírá data)
-  prometheus:
+   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus
     restart: unless-stopped
@@ -147,7 +190,7 @@ services:
       - "9090:9090"
 
   # 2. Node Exporter (Senzor - kouká na CPU/RAM hostitele)
-  node-exporter:
+   node-exporter:
     image: quay.io/prometheus/node-exporter:latest
     container_name: node-exporter
     command:
@@ -158,7 +201,7 @@ services:
     # Node exporter nepotřebuje být na Homepage, běží na pozadí
 
   # 3. Grafana (Tvář - kreslí grafy)
-  grafana:
+   grafana:
     image: grafana/grafana:latest
     container_name: grafana
     restart: unless-stopped
