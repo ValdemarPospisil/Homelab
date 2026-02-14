@@ -1,0 +1,12 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/settings/
+
+title: Můj Domácí Server
+background:
+  image: https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2070&auto=format&fit=crop
+  opacity: 50
+theme: dark
+
+providers:
+  openweathermap: 2dffbcaa75445b07c13bdfcc8ef7cedd

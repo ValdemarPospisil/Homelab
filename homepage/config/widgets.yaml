@@ -1,0 +1,14 @@
+- resources:
+    cpu: true
+    memory: true
+    disk: /
+
+- search:
+    provider: google
+    target: _blank
+
+- openweathermap:
+    label: "Počasí Děčín" # Popisek, co se ukáže nahoře
+    city: "Decin"
+    units: metric
+    cache: 15
