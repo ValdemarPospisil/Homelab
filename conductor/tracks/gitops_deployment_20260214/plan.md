@@ -2,9 +2,9 @@
 
 ## Phase 1: Foundation and Scripting
 
-- [ ] Task: Create a deployment script template
-    - [ ] Write tests to verify script logic (dry-run mode)
-    - [ ] Implement the `deploy.sh` script with basic git and docker-compose logic
+- [x] Task: Create a deployment script template [d9cb843]
+    - [x] Write tests to verify script logic (dry-run mode)
+    - [x] Implement the `deploy.sh` script with basic git and docker-compose logic
 - [ ] Task: Integrate Ansible into the deployment flow
     - [ ] Write tests to verify ansible-playbook command generation
     - [ ] Update `deploy.sh` to run the Ansible setup playbook before starting containers
