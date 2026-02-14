@@ -1,0 +1,1 @@
+* * * * * /usr/bin/bash $HOME/School/Homelab/deploy.sh >> $HOME/School/Homelab/deploy.log 2>&1
