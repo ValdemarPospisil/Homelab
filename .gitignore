@@ -1,0 +1,10 @@
+# Ignoruj složky s médii
+media/
+books/
+
+# Ignoruj databáze a citlivá data
+*.db
+.env
+plex/Library/
+
+docker-compose.override.yml

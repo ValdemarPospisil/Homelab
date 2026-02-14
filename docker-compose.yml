@@ -1,0 +1,182 @@
+services:
+  # --- PLEX (Filmy a seriály) ---
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    network_mode: host
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Prague
+      - VERSION=docker
+    volumes:
+      - ./plex/config:/config
+      - ./media/movies:/movies
+      - ./media/tv:/tv
+      - ./media/music:/music
+    devices:
+      - /dev/dri:/dev/dri
+    restart: unless-stopped
+
+  # --- ADGUARD HOME ---
+  adguardhome:
+    image: adguard/adguardhome
+    container_name: adguardhome
+    profiles:
+      - ads
+    network_mode: host
+    volumes:
+      - ./adguard/work:/opt/adguardhome/work
+      - ./adguard/conf:/opt/adguardhome/conf
+    restart: unless-stopped
+
+  # --- UPTIME KUMA ---
+  uptime-kuma:
+    image: louislam/uptime-kuma:1
+    container_name: uptime-kuma
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./uptime-kuma:/app/data
+    restart: unless-stopped
+
+  # --- CTOP ---
+  ctop:
+    image: quay.io/vektorlab/ctop:latest
+    container_name: ctop
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+  # --- MINECRAFT ---
+  minecraft:
+    image: itzg/minecraft-server
+    container_name: minecraft
+    profiles: 
+      - game
+    ports:
+      - "25565:25565"
+    environment:
+      - EULA=TRUE
+      - TYPE=FABRIC
+      - VERSION=1.21.11
+      - MEMORY=7G
+      - MOTD=království
+      - DIFFICULTY=normal
+      - MAX_PLAYERS=10
+      - VIEW_DISTANCE=11
+    volumes:
+      - ./minecraft/data:/data
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+
+  # --- AUDIOBOOKSHELF ---
+  audiobookshelf:
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    container_name: audiobookshelf
+    ports:
+      - "13378:80"
+    volumes:
+      - ./media/audiobooks:/audiobooks
+      - ./media/podcasts:/podcasts
+      - ./audiobookshelf/config:/config
+      - ./audiobookshelf/metadata:/metadata
+    environment:
+      - TZ=Europe/Prague
+      - USER_ID=1000
+      - GROUP_ID=1000
+    restart: unless-stopped
+
+  playit:
+    image: wisdomsky/playit-docker-web:latest
+    container_name: playit
+    network_mode: host      # Musí vidět síť, aby vytvořil tunel
+    volumes:
+      - ./playit/data:/data
+    restart: unless-stopped 
+
+  kavita:
+    image: jvmilazz0/kavita:latest
+    container_name: kavita
+    volumes:
+      - ./media/manga:/manga
+      - ./media/books:/books
+      - ./kavita/data:/kavita/config
+    environment:
+      - TZ=Europe/Prague
+    ports:
+      - "5000:5000"                # Dostupne na portu 5000
+    restart: unless-stopped
+
+  filebrowser:
+    image: filebrowser/filebrowser:latest
+    container_name: filebrowser
+    volumes:
+      - ./media:/srv               
+      - ./filebrowser/filebrowser.db:/database.db
+      - ./filebrowser/settings.json:/.filebrowser.json
+    ports:
+      - "8082:80"                  # Dostupne na portu 8082
+    restart: unless-stopped
+
+  # --- MONITORING STACK ---
+
+  # 1. Prometheus (Mozek - sbírá data)
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    restart: unless-stopped
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml # Náš config
+      - prometheus_data:/prometheus # Ukládání historie
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention.time=15d' # Držet historii 15 dní
+    labels:
+      - "homepage.group=Monitoring"
+      - "homepage.name=Prometheus"
+      - "homepage.icon=prometheus.png"
+      - "homepage.href=http://192.168.1.31:9090"
+    # Ports není nutné vystavovat ven, pokud k němu přistupuje jen Grafana,
+    # ale pro debug se to hodí:
+    ports:
+      - "9090:9090"
+
+  # 2. Node Exporter (Senzor - kouká na CPU/RAM hostitele)
+  node-exporter:
+    image: quay.io/prometheus/node-exporter:latest
+    container_name: node-exporter
+    command:
+      - '--path.rootfs=/host'
+    restart: unless-stopped
+    volumes:
+      - '/:/host:ro,rslave' # Vidí celý disk hostitele (jen pro čtení)
+    # Node exporter nepotřebuje být na Homepage, běží na pozadí
+
+  # 3. Grafana (Tvář - kreslí grafy)
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana # Aby grafy nezmizely po restartu
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=tajneheslo # Změň si po prvním přihlášení!
+    labels:
+      - "homepage.group=Monitoring"
+      - "homepage.name=Grafana"
+      - "homepage.icon=grafana.png"
+      - "homepage.href=http://192.168.1.31:3000"
+
+# --- VOLUMES (Na konci souboru) ---
+volumes:
+  prometheus_data:
+  grafana_data:
+  # ... tvoje ostatní volumes ...

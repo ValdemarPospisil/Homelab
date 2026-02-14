@@ -1,0 +1,92 @@
+---
+- name: Kompletní nastavení Homelab serveru (Void Linux)
+  hosts: homelab
+  become: yes  # Vše se spouští jako root (sudo)
+  vars:
+    username: "valdemar"
+    # Cesta, kam se to stáhne: /home/valdemar/homelab
+    homelab_dir: "/home/{{ username }}/homelab"
+    repo_url: "https://github.com/ValdemarPospisil/Homelab.git"
+
+  tasks:
+    # --- 1. UŽIVATEL A SKUPINY ---
+    - name: Zajistit, že existuje skupina 'docker'
+      group:
+        name: docker
+        state: present
+
+    - name: Vytvořit/Aktualizovat uživatele {{ username }}
+      user:
+        name: "{{ username }}"
+        shell: /bin/bash
+        groups: docker,wheel,users
+        append: yes  # Důležité: nesmaže ostatní skupiny
+        create_home: yes
+        state: present
+
+    # --- 2. SYSTÉM A BALÍČKY (XBPS) ---
+    - name: Aktualizovat celý systém (xbps-install -Su)
+      community.general.xbps:
+        update_cache: yes
+        upgrade: yes
+
+    - name: Nainstalovat nutné balíčky
+      community.general.xbps:
+        name:
+          - git
+          - vim
+          - curl
+          - docker
+          - docker-compose
+        state: present
+
+    # --- 3. SLUŽBY (RUNIT) ---
+    - name: Povolit službu Docker (symlink pro Runit)
+      file:
+        src: /etc/sv/docker
+        dest: /var/service/docker
+        state: link
+
+    - name: Počkat na start Dockeru
+      command: docker info
+      register: docker_result
+      retries: 10
+      delay: 5
+      until: docker_result.rc == 0
+      changed_when: false
+
+    # --- 4. GIT REPOZITÁŘ ---
+    # Tento krok stáhne tvůj repozitář. Pokud složka neexistuje, vytvoří ji.
+    # Pokud existuje a je tam bordel, srovná ji podle GitHubu.
+    - name: Naklonovat Homelab repozitář z GitHubu
+      git:
+        repo: "{{ repo_url }}"
+        dest: "{{ homelab_dir }}"
+        force: no          # 'yes' by přepsalo tvé lokální změny, 'no' je bezpečnější
+        update: yes        # Stáhne novinky (git pull)
+        version: main      # Nebo 'master', podle toho jak se jmenuje hlavní větev
+      # Důležité: Musíme nastavit vlastníka, jinak by to patřilo rootovi!
+      register: git_clone
+
+    - name: Nastavit oprávnění složky (aby tam mohl zapisovat Valdemar)
+      file:
+        path: "{{ homelab_dir }}"
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        recurse: yes
+
+    # --- 5. DOCKER COMPOSE ---
+    # Spustí jen "hlavní" služby. Profily (Minecraft) ignoruje.
+    - name: Spustit kontejnery (docker compose up -d)
+      command: docker compose up -d
+      args:
+        chdir: "{{ homelab_dir }}"
+      # Spustí se jen, když se změnilo repo nebo když Docker neběží
+      # Můžeš to pouštět pokaždé, Docker je chytrý a pozná, co už běží.
+
+    # Příklad pro Minecraft (zatím zakomentované):
+    # Pokud bys chtěl, aby Ansible zapnul i Minecraft, odkomentuj:
+    # - name: Spustit Minecraft (Profile)
+    #   command: docker compose --profile game up -d
+    #   args:
+    #     chdir: "{{ homelab_dir }}"
