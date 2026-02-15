@@ -1,0 +1,23 @@
+- search:
+    provider: google
+    focus: true
+    showOptional: true
+
+- resources:
+    cpu: true
+    memory: true
+    disk: /
+
+- openweathermap:
+    apiKey: "{{HOMEPAGE_VAR_OPENWEATHER}}"
+    city: "Decin"
+    units: metric
+    cache: 15
+    label: "Počasí Děčín"
+
+- datetime:
+    text_size: xl
+    format:
+      date: long
+      time: short
+      hour12: false

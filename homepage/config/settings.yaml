@@ -1,0 +1,16 @@
+title: Homelab Dashboard
+layout:
+  Media:
+    style: grid
+    columns: 3
+  Monitoring:
+    style: grid
+    columns: 4
+  Infrastructure:
+    style: grid
+    columns: 3
+
+headerStyle: clean
+shades:
+  blur: 0
+  opacity: 50
