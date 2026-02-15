@@ -53,3 +53,33 @@
         icon: dozzle.png
         href: http://192.168.1.31:8080
 
+- Infrastructure:
+    - Docker:
+        icon: docker.png
+        widget:
+          type: docker
+          url: /var/run/docker.sock
+
+    - Watchtower:
+        icon: watchtower.png
+        widget:
+          type: watchtower
+          url: /var/run/docker.sock
+
+    - FileBrowser:
+        icon: filebrowser.png
+        href: http://192.168.1.31:8082
+
+    - AdGuard Home:
+        icon: adguard-home.png
+        href: http://192.168.1.31:80
+        widget:
+          type: adguard
+          url: http://192.168.1.31:80
+          username: "{{HOMEPAGE_VAR_ADGUARD_USER}}"
+          password: "{{HOMEPAGE_VAR_ADGUARD_PASSWORD}}"
+
+    - Playit.gg:
+        icon: playit.png
+
+
