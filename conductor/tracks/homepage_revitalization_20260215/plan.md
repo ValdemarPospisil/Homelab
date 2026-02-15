@@ -28,8 +28,8 @@
 - [x] Task: Conductor - User Manual Verification 'Configuration Implementation' (Protocol in workflow.md) 64da92c
 
 ## Phase 3: Final Verification & Cleanup
-- [ ] Task: Validate YAML syntax and secret isolation
-    - [ ] Run a YAML linter or basic syntax check on modified files
-    - [ ] Ensure all API keys use `{{HOMEPAGE_VAR_...}}` syntax
-    - [ ] Verify `docker-compose.yml` environment variable passing for Homepage
+- [x] Task: Validate YAML syntax and secret isolation 5309732
+    - [x] Run a YAML linter or basic syntax check on modified files
+    - [x] Ensure all API keys use `{{HOMEPAGE_VAR_...}}` syntax
+    - [x] Verify `docker-compose.yml` environment variable passing for Homepage
 - [ ] Task: Conductor - User Manual Verification 'Final Verification & Cleanup' (Protocol in workflow.md)
