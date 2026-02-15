@@ -10,25 +10,26 @@
 - [x] Task: Conductor - User Manual Verification 'Research & Preparation' (Protocol in workflow.md) 232b80e
 
 ## Phase 2: Configuration Implementation
-- [~] Task: Update `widgets.yaml` for resource monitoring and global settings
-    - [ ] Add system resource widgets (CPU, Memory, Disk)
-    - [ ] Set global header and search settings for a "Data-Rich" look
-- [ ] Task: Configure 'Media' category in `services.yaml`
-    - [ ] Add Plex with API integration
-    - [ ] Add Audiobookshelf with API integration
-    - [ ] Add Kavita with API integration
-- [ ] Task: Configure 'Monitoring' category in `services.yaml`
-    - [ ] Add Grafana with status/widget integration
-    - [ ] Add Prometheus status
-    - [ ] Add Uptime Kuma status
-- [ ] Task: Configure 'Infrastructure' category in `services.yaml`
-    - [ ] Add Docker status/stats
-    - [ ] Add Watchtower
-    - [ ] Add FileBrowser
-- [ ] Task: Conductor - User Manual Verification 'Configuration Implementation' (Protocol in workflow.md)
+- [x] Task: Update `widgets.yaml` for resource monitoring and global settings 598276c
+    - [x] Add system resource widgets (CPU, Memory, Disk)
+    - [x] Set global header and search settings for a "Data-Rich" look
+- [x] Task: Configure 'Media' category in `services.yaml` d4e3ef3
+    - [x] Add Plex with API integration
+    - [x] Add Audiobookshelf with API integration
+    - [x] Add Kavita with API integration
+- [x] Task: Configure 'Monitoring' category in `services.yaml` f9981e4
+    - [x] Add Grafana with status/widget integration
+    - [x] Add Prometheus status
+    - [x] Add Uptime Kuma status
+- [x] Task: Configure 'Infrastructure' category in `services.yaml` f6db19b
+    - [x] Add Docker status/stats
+    - [x] Add Watchtower
+    - [x] Add FileBrowser
+- [x] Task: Conductor - User Manual Verification 'Configuration Implementation' (Protocol in workflow.md) f6db19b
 
 ## Phase 3: Final Verification & Cleanup
 - [ ] Task: Validate YAML syntax and secret isolation
     - [ ] Run a YAML linter or basic syntax check on modified files
     - [ ] Ensure all API keys use `{{HOMEPAGE_VAR_...}}` syntax
+    - [ ] Verify `docker-compose.yml` environment variable passing for Homepage
 - [ ] Task: Conductor - User Manual Verification 'Final Verification & Cleanup' (Protocol in workflow.md)
