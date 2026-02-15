@@ -1,0 +1,8 @@
+{
+  "track_id": "homepage_revitalization_20260215",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-02-15T12:00:00Z",
+  "updated_at": "2026-02-15T12:00:00Z",
+  "description": "make the homepage look better and work, currently it does not show the services that are running,i think we need to change the config files in @homepage/config/ i do have a api key on the server in .env file but that is all we need to fix everything else i also want it to look nice or if you have any other enhacment please do. but dont run the docker here"
+}
