@@ -1,0 +1,25 @@
+- Media:
+    - Plex:
+        icon: plex.png
+        href: http://192.168.1.31:32400/web
+        widget:
+          type: plex
+          url: http://192.168.1.31:32400
+          key: "{{HOMEPAGE_VAR_PLEX_TOKEN}}"
+
+    - Audiobookshelf:
+        icon: audiobookshelf.png
+        href: http://192.168.1.31:13378
+        widget:
+          type: audiobookshelf
+          url: http://192.168.1.31:13378
+          key: "{{HOMEPAGE_VAR_AUDIOBOOKSHELF_KEY}}"
+
+    - Kavita:
+        icon: kavita.png
+        href: http://192.168.1.31:5000
+        widget:
+          type: kavita
+          url: http://192.168.1.31:5000
+          username: "{{HOMEPAGE_VAR_KAVITA_USER}}"
+          password: "{{HOMEPAGE_VAR_KAVITA_PASSWORD}}"
