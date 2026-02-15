@@ -1,16 +1,16 @@
 # Implementation Plan - Homepage Dashboard Revitalization
 
 ## Phase 1: Research & Preparation
-- [ ] Task: Audit existing Homepage configuration and environment variables
-    - [ ] Read `homepage/config/services.yaml` and `homepage/config/widgets.yaml`
-    - [ ] Identify available environment variables in the host `.env` file (if accessible) or determine necessary names
-- [ ] Task: Map services to Homepage API/Widget capabilities
-    - [ ] Research Homepage documentation for Plex, Grafana, and Docker API integrations
-    - [ ] Define the widget structure for CPU, RAM, and Disk monitoring
+- [x] Task: Audit existing Homepage configuration and environment variables 27b4bf7
+    - [x] Read `homepage/config/services.yaml` and `homepage/config/widgets.yaml`
+    - [x] Identify available environment variables in the host `.env` file (if accessible) or determine necessary names
+- [x] Task: Map services to Homepage API/Widget capabilities 27b4bf7
+    - [x] Research Homepage documentation for Plex, Grafana, and Docker API integrations
+    - [x] Define the widget structure for CPU, RAM, and Disk monitoring
 - [ ] Task: Conductor - User Manual Verification 'Research & Preparation' (Protocol in workflow.md)
 
 ## Phase 2: Configuration Implementation
-- [ ] Task: Update `widgets.yaml` for resource monitoring and global settings
+- [~] Task: Update `widgets.yaml` for resource monitoring and global settings
     - [ ] Add system resource widgets (CPU, Memory, Disk)
     - [ ] Set global header and search settings for a "Data-Rich" look
 - [ ] Task: Configure 'Media' category in `services.yaml`
