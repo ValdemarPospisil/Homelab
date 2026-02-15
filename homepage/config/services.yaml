@@ -2,10 +2,10 @@
     - Plex:
         icon: plex.png
         href: http://192.168.1.31:32400/web
-        widget:
-          type: plex
-          url: http://192.168.1.31:32400
-          key: "{{HOMEPAGE_VAR_PLEX_TOKEN}}"
+  #      widget:
+  #        type: plex
+  #        url: http://192.168.1.31:32400
+  #        key: "{{HOMEPAGE_VAR_PLEX_TOKEN}}"
 
     - Audiobookshelf:
         icon: audiobookshelf.png
@@ -73,11 +73,11 @@
     - AdGuard Home:
         icon: adguard-home.png
         href: http://192.168.1.31:80
-        widget:
-          type: adguard
-          url: http://192.168.1.31:80
-          username: "{{HOMEPAGE_VAR_ADGUARD_USER}}"
-          password: "{{HOMEPAGE_VAR_ADGUARD_PASSWORD}}"
+  #      widget:
+  #        type: adguard
+  #        url: http://192.168.1.31:80
+  #        username: "{{HOMEPAGE_VAR_ADGUARD_USER}}"
+  #        password: "{{HOMEPAGE_VAR_ADGUARD_PASSWORD}}"
 
     - Playit.gg:
         icon: playit.png
