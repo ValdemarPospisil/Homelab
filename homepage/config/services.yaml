@@ -23,3 +23,33 @@
           url: http://192.168.1.31:5000
           username: "{{HOMEPAGE_VAR_KAVITA_USER}}"
           password: "{{HOMEPAGE_VAR_KAVITA_PASSWORD}}"
+
+- Monitoring:
+    - Grafana:
+        icon: grafana.png
+        href: http://192.168.1.31:3002
+        widget:
+          type: grafana
+          url: http://192.168.1.31:3002
+          username: "{{HOMEPAGE_VAR_GRAFANA_USER}}"
+          password: "{{HOMEPAGE_VAR_GRAFANA_PASSWORD}}"
+
+    - Prometheus:
+        icon: prometheus.png
+        href: http://192.168.1.31:9090
+        widget:
+          type: prometheus
+          url: http://192.168.1.31:9090
+
+    - Uptime Kuma:
+        icon: uptime-kuma.png
+        href: http://192.168.1.31:3001
+        widget:
+          type: uptimekuma
+          url: http://192.168.1.31:3001
+          slug: default
+
+    - Logs (Dozzle):
+        icon: dozzle.png
+        href: http://192.168.1.31:8080
+
