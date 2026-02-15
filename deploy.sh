@@ -2,6 +2,8 @@
 
 # deploy.sh - Automated deployment script for Homelab
 
+cd "$(dirname "$0")" || exit 1
+
 set -e # Exit on error
 
 DRY_RUN=false

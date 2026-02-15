@@ -8,3 +8,18 @@ books/
 plex/Library/
 
 docker-compose.override.yml
+
+
+plex/config/
+plex/transcode/
+audiobookshelf/config/
+audiobookshelf/metadata/
+kavita/data/
+filebrowser/filebrowser.db
+filebrowser/settings.json
+uptime-kuma/
+minecraft/data/
+playit/data/
+adguard/work/
+grafana_data/
+prometheus_data/
