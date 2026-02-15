@@ -9,7 +9,7 @@
     - [x] Define the widget structure for CPU, RAM, and Disk monitoring
 - [x] Task: Conductor - User Manual Verification 'Research & Preparation' (Protocol in workflow.md) 232b80e
 
-## Phase 2: Configuration Implementation
+## Phase 2: Configuration Implementation [checkpoint: 64da92c]
 - [x] Task: Update `widgets.yaml` for resource monitoring and global settings 598276c
     - [x] Add system resource widgets (CPU, Memory, Disk)
     - [x] Set global header and search settings for a "Data-Rich" look
@@ -25,7 +25,7 @@
     - [x] Add Docker status/stats
     - [x] Add Watchtower
     - [x] Add FileBrowser
-- [x] Task: Conductor - User Manual Verification 'Configuration Implementation' (Protocol in workflow.md) f6db19b
+- [x] Task: Conductor - User Manual Verification 'Configuration Implementation' (Protocol in workflow.md) 64da92c
 
 ## Phase 3: Final Verification & Cleanup
 - [ ] Task: Validate YAML syntax and secret isolation
