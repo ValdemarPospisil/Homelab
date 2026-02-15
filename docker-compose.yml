@@ -24,7 +24,7 @@ services:
       - grafana_data:/var/lib/grafana
     environment:
       - GF_SECURITY_ADMIN_USER=admin
-      - GF_SECURITY_ADMIN_PASSWORD=${GF_SECURITY_ADMIN_PASSWORD}
+      - GF_SECURITY_ADMIN_PASSWORD=tajneheslo
     labels:
       - "homepage.group=Monitoring"
       - "homepage.name=Grafana"
@@ -198,6 +198,11 @@ services:
     environment:
       - WATCHTOWER_CLEANUP=true
       - WATCHTOWER_POLL_INTERVAL=86400
+      - WATCHTOWER_HTTP_API_UPDATE=true
+      - WATCHTOWER_HTTP_API_TOKEN=moje_tajne_token_123
+      - WATCHTOWER_HTTP_API_METRICS=true
+    ports:
+      - "8081:8080"
     restart: unless-stopped
     labels:
       - "homepage.group=Utilities"
