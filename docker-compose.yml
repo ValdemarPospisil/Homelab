@@ -216,7 +216,7 @@ services:
     devices:
       - /dev/net/tun:/dev/net/tun
     ports:
-      - "8080:8080" # WebUI pro qBittorrent
+      - "8090:8080" # WebUI pro qBittorrent
       - "13567:13567" # Port Forwarding TCP (zpráva od podpory)
       - "13567:13567/udp" # Port Forwarding UDP
     environment:
