@@ -225,7 +225,7 @@ services:
       - OPENVPN_USER=${VPN_USER}
       - OPENVPN_PASSWORD=${VPN_PASSWORD}
       - OPENVPN_CUSTOM_CONFIG=/gluetun/custom.conf # Odkaz na ten soubor
-      - FIREWALL_VPN_INPUT_PORTS=12345 # Port, co ti přidělí
+      - FIREWALL_VPN_INPUT_PORTS=13567 # Port, co ti přidělí
     volumes:
       - ./gluetun/NL1.ovpn:/gluetun/custom.conf  
     restart: always
