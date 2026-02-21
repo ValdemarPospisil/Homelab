@@ -310,6 +310,20 @@ services:
       - "homepage.icon=sonarr.png"
       - "homepage.href=http://192.168.1.31:8989"
 
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    environment:
+      - LOG_LEVEL=info
+      - TZ=Europe/Prague
+    ports:
+      - "8191:8191"
+    restart: unless-stopped
+    labels:
+      - "homepage.group=Utilities"
+      - "homepage.name=FlareSolverr"
+      - "homepage.icon=flaresolverr.png"
+
   # --- SPECIAL ---
   adguardhome:
     image: adguard/adguardhome
