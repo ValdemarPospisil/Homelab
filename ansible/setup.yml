@@ -41,6 +41,17 @@
           - cronie
         state: present
 
+    - name: Ensure Tailscale is installed (xbps)
+      package:
+        name: tailscale
+        state: present
+
+    - name: Enable and start tailscaled service (Void Linux runit)
+      file:
+        src: /etc/sv/tailscaled
+        dest: /var/service/tailscaled
+        state: link
+
     # --- 3. SLUŽBY (RUNIT) ---
     - name: Povolit službu Docker (symlink pro Runit)
       file:
