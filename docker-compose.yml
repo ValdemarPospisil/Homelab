@@ -324,6 +324,26 @@ services:
       - "homepage.name=FlareSolverr"
       - "homepage.icon=flaresolverr.png"
 
+  lidarr:
+    image: lscr.io/linuxserver/lidarr:latest
+    container_name: lidarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Prague
+    volumes:
+      - ./lidarr/config:/config
+      # Mapujeme kořenovou složku 'media' jako '/data', aby fungovaly hardlinky
+      - ./media:/data 
+    ports:
+      - "8686:8686"
+    restart: unless-stopped
+    labels:
+      - "homepage.group=Management"
+      - "homepage.name=Lidarr (Music)"
+      - "homepage.icon=lidarr.png"
+      - "homepage.href=http://192.168.1.31:8686"
+
   # --- SPECIAL ---
   adguardhome:
     image: adguard/adguardhome
