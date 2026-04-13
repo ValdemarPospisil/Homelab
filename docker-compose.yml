@@ -6,13 +6,13 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
-      - "8080:8080"
+      - "8088:8080"
     restart: unless-stopped
     labels:
       - "homepage.group=Monitoring"
       - "homepage.name=Logs (Dozzle)"
       - "homepage.icon=dozzle.png"
-      - "homepage.href=http://192.168.1.31:8080"
+      - "homepage.href=http://192.168.1.31:8088"
 
   grafana:
     image: grafana/grafana:latest
@@ -39,6 +39,10 @@ services:
     restart: unless-stopped
     volumes:
       - '/:/host:ro'
+    labels:
+      - "homepage.group=Monitoring"
+      - "homepage.name=Node Exporter"
+      - "homepage.icon=prometheus.png"
 
   prometheus:
     image: prom/prometheus:latest
@@ -144,6 +148,10 @@ services:
     tty: true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
+    labels:
+      - "homepage.group=Utilities"
+      - "homepage.name=ctop"
+      - "homepage.icon=docker.png"
 
   filebrowser:
     image: filebrowser/filebrowser:latest
@@ -250,6 +258,11 @@ services:
     depends_on:
       gluetun:
         condition: service_healthy
+    labels:
+      - "homepage.group=Media"
+      - "homepage.name=qBittorrent"
+      - "homepage.icon=qbittorrent.png"
+      - "homepage.href=http://192.168.1.31:8090"
 
   # --- MANAGEMENT (ARR STACK) ---
   prowlarr:
@@ -355,6 +368,11 @@ services:
       - ./adguard/work:/opt/adguardhome/work
       - ./adguard/conf:/opt/adguardhome/conf
     restart: unless-stopped
+    labels:
+      - "homepage.group=Utilities"
+      - "homepage.name=AdGuard Home"
+      - "homepage.icon=adguard-home.png"
+      - "homepage.href=http://192.168.1.31"
 
   minecraft:
     image: itzg/minecraft-server
@@ -377,6 +395,10 @@ services:
     restart: unless-stopped
     stdin_open: true
     tty: true
+    labels:
+      - "homepage.group=Gaming"
+      - "homepage.name=Minecraft Server"
+      - "homepage.icon=minecraft.png"
 
 volumes:
   prometheus_data:
