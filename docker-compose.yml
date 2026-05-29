@@ -368,21 +368,21 @@ services:
       - "homepage.icon=lidarr.png"
       - "homepage.href=http://192.168.1.31:8686"
 
-  overseerr:
-    image: sctx/overseerr:latest
-    container_name: overseerr
+  seerr:
+    image: ghcr.io/seerr-team/seerr:latest
+    container_name: seerr
     environment:
       - LOG_LEVEL=debug
       - TZ=Europe/Prague
     volumes:
-      - ./overseerr/config:/app/config
+      - ./seerr/config:/app/config
     ports:
       - "5055:5055"
     restart: unless-stopped
     labels:
       - "homepage.group=Management"
-      - "homepage.name=Overseerr (Requests)"
-      - "homepage.icon=overseerr.png"
+      - "homepage.name=Seerr (Requests)"
+      - "homepage.icon=seerr.png"
       - "homepage.href=http://192.168.1.31:5055"
 
   recyclarr:
