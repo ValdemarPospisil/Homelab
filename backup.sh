@@ -27,15 +27,29 @@ trap 'log "Spouštím Docker kontejnery..."; cd "$HOMELAB_PATH" && docker compos
 
 # 2. Vytvoření komprimovaného archivu složky homelab
 log "Vytvářím archiv konfigurací..."
+
+# Dočasně vypneme set -e, protože tar vrací kód 1 (varování), pokud se nějaký soubor změní za běhu
+set +e
 tar --exclude="media" \
     --exclude="books" \
     --exclude="minecraft/data" \
     --exclude="plex/transcode" \
     --exclude="plex/config/Library/Application Support/Plex Media Server/Cache" \
+    --exclude="*.log" \
+    --exclude="*.sock" \
+    --exclude="*.socket" \
     -czf "$BACKUP_PATH" -C "/home/valdemar" homelab
+TAR_RC=$?
+set -e
+
+# Kód 0 = úspěch, Kód 1 = varování (soubory se změnily/sockety), ostatní jsou kritické chyby
+if [ $TAR_RC -ne 0 ] && [ $TAR_RC -ne 1 ]; then
+    log "Kritická chyba: Vytváření archivu selhalo s kódem $TAR_RC!"
+    exit $TAR_RC
+fi
 
 # 3. Spuštění kontejnerů zpět (proběhne automaticky díky trap EXIT výše)
-log "Archiv vytvořen: $BACKUP_NAME"
+log "Archiv vytvořen: $BACKUP_NAME (kód taru: $TAR_RC)"
 
 # 4. Nahrání na Google Drive přes Rclone
 log "Nahrávám archiv na Google Drive..."
