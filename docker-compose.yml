@@ -368,6 +368,23 @@ services:
       - "homepage.icon=lidarr.png"
       - "homepage.href=http://192.168.1.31:8686"
 
+  overseerr:
+    image: sct/overseerr:latest
+    container_name: overseerr
+    environment:
+      - LOG_LEVEL=debug
+      - TZ=Europe/Prague
+    volumes:
+      - ./overseerr/config:/app/config
+    ports:
+      - "5055:5055"
+    restart: unless-stopped
+    labels:
+      - "homepage.group=Management"
+      - "homepage.name=Overseerr (Requests)"
+      - "homepage.icon=overseerr.png"
+      - "homepage.href=http://192.168.1.31:5055"
+
   # --- SPECIAL ---
   adguardhome:
     image: adguard/adguardhome
