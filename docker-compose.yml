@@ -369,7 +369,7 @@ services:
       - "homepage.href=http://192.168.1.31:8686"
 
   overseerr:
-    image: sct/overseerr:latest
+    image: sctx/overseerr:latest
     container_name: overseerr
     environment:
       - LOG_LEVEL=debug

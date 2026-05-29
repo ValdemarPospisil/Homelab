@@ -39,6 +39,7 @@
           - docker
           - docker-compose
           - cronie
+          - rclone
         state: present
 
     - name: Ensure Tailscale is installed (xbps)
@@ -109,3 +110,34 @@
         minute: "*"
         user: "{{ username }}"
         job: "/usr/bin/bash {{ homelab_dir }}/deploy.sh >> {{ homelab_dir }}/deploy.log 2>&1"
+
+    # --- 7. RCLONE BACKUP SYSTEM ---
+    - name: Vytvořit adresář pro konfiguraci rclone
+      file:
+        path: "/home/{{ username }}/.config/rclone"
+        state: directory
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        mode: '0700'
+
+    - name: Zkopírovat rclone.conf na server
+      copy:
+        src: files/rclone.conf
+        dest: "/home/{{ username }}/.config/rclone/rclone.conf"
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        mode: '0600'
+
+    - name: Zajistit spustitelnost backup.sh
+      file:
+        path: "{{ homelab_dir }}/backup.sh"
+        mode: '0755'
+
+    - name: Nastavit cron job pro denní zálohování
+      ansible.builtin.cron:
+        name: "Homelab Daily Backup"
+        minute: "0"
+        hour: "3"
+        user: "{{ username }}"
+        job: "/usr/bin/bash {{ homelab_dir }}/backup.sh >> {{ homelab_dir }}/backup.log 2>&1"
+

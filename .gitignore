@@ -23,3 +23,8 @@ playit/data/
 adguard/work/
 grafana_data/
 prometheus_data/
+
+# Rclone konfigurace a zálohy
+rclone.conf
+ansible/files/rclone.conf
+*.conf.bak
