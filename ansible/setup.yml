@@ -102,7 +102,7 @@
     # --- 5. DOCKER COMPOSE ---
     # Spustí jen "hlavní" služby. Profily (Minecraft) ignoruje.
     - name: Spustit kontejnery (docker compose up -d)
-      command: docker compose up -d
+      command: docker compose up -d --remove-orphans
       args:
         chdir: "{{ homelab_dir }}"
       # Spustí se jen, když se změnilo repo nebo když Docker neběží
