@@ -19,7 +19,7 @@
       user:
         name: "{{ username }}"
         shell: /bin/bash
-        groups: docker,wheel,users
+        groups: docker,wheel,users,video,render
         append: yes  # Důležité: nesmaže ostatní skupiny
         create_home: yes
         state: present
@@ -132,4 +132,12 @@
         hour: "3"
         user: "{{ username }}"
         job: "/usr/bin/bash {{ homelab_dir }}/backup.sh >> {{ homelab_dir }}/backup.log 2>&1"
+
+    - name: Nastavit cron job pro týdenní čištění Dockeru
+      ansible.builtin.cron:
+        name: "Docker System Prune"
+        special_time: "weekly"
+        user: "root"
+        job: "/usr/bin/docker system prune -af --volumes > /dev/null 2>&1"
+
 

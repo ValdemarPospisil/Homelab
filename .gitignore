@@ -28,3 +28,6 @@ prometheus_data/
 rclone.conf
 ansible/files/rclone.conf
 *.conf.bak
+
+# Recyclarr konfigurace (obsahuje API klíče)
+recyclarr/

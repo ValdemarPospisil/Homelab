@@ -385,6 +385,21 @@ services:
       - "homepage.icon=overseerr.png"
       - "homepage.href=http://192.168.1.31:5055"
 
+  recyclarr:
+    image: ghcr.io/recyclarr/recyclarr:8
+    container_name: recyclarr
+    user: "1000:1000"
+    environment:
+      - TZ=Europe/Prague
+      - CRON_SCHEDULE=0 3 * * *
+    volumes:
+      - ./recyclarr/config:/config
+    restart: unless-stopped
+    labels:
+      - "homepage.group=Management"
+      - "homepage.name=Recyclarr"
+      - "homepage.icon=recyclarr.png"
+
   # --- SPECIAL ---
   adguardhome:
     image: adguard/adguardhome
