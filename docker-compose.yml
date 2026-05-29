@@ -3,6 +3,8 @@ services:
   dozzle:
     image: amir20/dozzle:latest
     container_name: dozzle
+    profiles:
+      - monitoring
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
@@ -14,9 +16,12 @@ services:
       - "homepage.icon=dozzle.png"
       - "homepage.href=http://192.168.1.31:8088"
 
+
   grafana:
     image: grafana/grafana:latest
     container_name: grafana
+    profiles:
+      - monitoring
     restart: unless-stopped
     ports:
       - "3002:3000"
@@ -31,9 +36,12 @@ services:
       - "homepage.icon=grafana.png"
       - "homepage.href=http://192.168.1.31:3002"
 
+
   node-exporter:
     image: quay.io/prometheus/node-exporter:latest
     container_name: node-exporter
+    profiles:
+      - monitoring
     command:
       - '--path.rootfs=/host'
     restart: unless-stopped
@@ -44,9 +52,12 @@ services:
       - "homepage.name=Node Exporter"
       - "homepage.icon=prometheus.png"
 
+
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus
+    profiles:
+      - monitoring
     restart: unless-stopped
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
@@ -63,9 +74,12 @@ services:
     ports:
       - "9090:9090"
 
+
   uptime-kuma:
     image: louislam/uptime-kuma:1
     container_name: uptime-kuma
+    profiles:
+      - monitoring
     ports:
       - "3001:3001"
     volumes:
@@ -76,6 +90,7 @@ services:
       - "homepage.name=Uptime Kuma"
       - "homepage.icon=uptime-kuma.png"
       - "homepage.href=http://192.168.1.31:3001"
+
 
   # --- MEDIA ---
   audiobookshelf:
@@ -140,22 +155,11 @@ services:
       - "homepage.href=http://192.168.1.31:32400/web"
 
   # --- UTILITIES ---
-  ctop:
-    image: quay.io/vektorlab/ctop:latest
-    container_name: ctop
-    restart: unless-stopped
-    stdin_open: true
-    tty: true
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    labels:
-      - "homepage.group=Utilities"
-      - "homepage.name=ctop"
-      - "homepage.icon=docker.png"
-
   filebrowser:
     image: filebrowser/filebrowser:latest
     container_name: filebrowser
+    profiles:
+      - utilities
     volumes:
       - ./media:/srv               
       - ./filebrowser/filebrowser.db:/database.db
@@ -168,6 +172,7 @@ services:
       - "homepage.name=FileBrowser"
       - "homepage.icon=filebrowser.png"
       - "homepage.href=http://192.168.1.31:8082"
+
 
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
@@ -188,6 +193,8 @@ services:
   playit:
     image: wisdomsky/playit-docker-web:latest
     container_name: playit
+    profiles:
+      - game
     network_mode: host
     volumes:
       - ./playit/data:/data
@@ -197,9 +204,12 @@ services:
       - "homepage.name=Playit.gg"
       - "homepage.icon=playit.png"
 
+
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower
+    profiles:
+      - utilities
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
@@ -215,6 +225,7 @@ services:
       - "homepage.group=Utilities"
       - "homepage.name=Watchtower"
       - "homepage.icon=watchtower.png"
+
 
   gluetun:
     image: qmcgaw/gluetun

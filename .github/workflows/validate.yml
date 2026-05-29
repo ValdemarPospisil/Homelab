@@ -1,0 +1,22 @@
+name: Validate Docker Compose
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create dummy .env file
+        run: touch .env
+
+      - name: Validate docker-compose.yml syntax
+        run: docker compose config
