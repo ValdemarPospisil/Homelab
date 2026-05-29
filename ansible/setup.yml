@@ -120,14 +120,6 @@
         group: "{{ username }}"
         mode: '0700'
 
-    - name: Zkopírovat rclone.conf na server
-      copy:
-        src: files/rclone.conf
-        dest: "/home/{{ username }}/.config/rclone/rclone.conf"
-        owner: "{{ username }}"
-        group: "{{ username }}"
-        mode: '0600'
-
     - name: Zajistit spustitelnost backup.sh
       file:
         path: "{{ homelab_dir }}/backup.sh"
