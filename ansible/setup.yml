@@ -15,6 +15,11 @@
         name: docker
         state: present
 
+    - name: Zajistit, že existuje skupina 'render'
+      group:
+        name: render
+        state: present
+
     - name: Vytvořit/Aktualizovat uživatele {{ username }}
       user:
         name: "{{ username }}"
