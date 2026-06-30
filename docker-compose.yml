@@ -141,6 +141,7 @@ services:
       - PGID=1000
       - TZ=Europe/Prague
       - VERSION=docker
+      - PLEX_CLAIM=claim-9XjaA8cF9xE34GUW6qSp
     volumes:
       - ./plex/config:/config
       - ./media:/data
