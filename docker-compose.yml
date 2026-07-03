@@ -14,7 +14,7 @@ services:
       - "homepage.group=Monitoring"
       - "homepage.name=Logs (Dozzle)"
       - "homepage.icon=dozzle.png"
-      - "homepage.href=http://192.168.1.31:8088"
+      - "homepage.href=http://10.0.0.9:8088"
 
 
   grafana:
@@ -34,7 +34,7 @@ services:
       - "homepage.group=Monitoring"
       - "homepage.name=Grafana"
       - "homepage.icon=grafana.png"
-      - "homepage.href=http://192.168.1.31:3002"
+      - "homepage.href=http://10.0.0.9:3002"
 
 
   node-exporter:
@@ -70,7 +70,7 @@ services:
       - "homepage.group=Monitoring"
       - "homepage.name=Prometheus"
       - "homepage.icon=prometheus.png"
-      - "homepage.href=http://192.168.1.31:9090"
+      - "homepage.href=http://10.0.0.9:9090"
     ports:
       - "9090:9090"
 
@@ -89,7 +89,7 @@ services:
       - "homepage.group=Monitoring"
       - "homepage.name=Uptime Kuma"
       - "homepage.icon=uptime-kuma.png"
-      - "homepage.href=http://192.168.1.31:3001"
+      - "homepage.href=http://10.0.0.9:3001"
 
 
   # --- MEDIA ---
@@ -112,7 +112,7 @@ services:
       - "homepage.group=Media"
       - "homepage.name=Audiobookshelf"
       - "homepage.icon=audiobookshelf.png"
-      - "homepage.href=http://192.168.1.31:13378"
+      - "homepage.href=http://10.0.0.9:13378"
 
   kavita:
     image: jvmilazz0/kavita:latest
@@ -130,7 +130,7 @@ services:
       - "homepage.group=Media"
       - "homepage.name=Kavita"
       - "homepage.icon=kavita.png"
-      - "homepage.href=http://192.168.1.31:5000"
+      - "homepage.href=http://10.0.0.9:5000"
 
   plex:
     image: lscr.io/linuxserver/plex:latest
@@ -153,7 +153,7 @@ services:
       - "homepage.group=Media"
       - "homepage.name=Plex"
       - "homepage.icon=plex.png"
-      - "homepage.href=http://192.168.1.31:32400/web"
+      - "homepage.href=http://10.0.0.9:32400/web"
 
   # --- UTILITIES ---
   filebrowser:
@@ -172,7 +172,7 @@ services:
       - "homepage.group=Utilities"
       - "homepage.name=FileBrowser"
       - "homepage.icon=filebrowser.png"
-      - "homepage.href=http://192.168.1.31:8082"
+      - "homepage.href=http://10.0.0.9:8082"
 
 
   homepage:
@@ -274,7 +274,7 @@ services:
       - "homepage.group=Media"
       - "homepage.name=qBittorrent"
       - "homepage.icon=qbittorrent.png"
-      - "homepage.href=http://192.168.1.31:8090"
+      - "homepage.href=http://10.0.0.9:8090"
 
   # --- MANAGEMENT (ARR STACK) ---
   prowlarr:
@@ -293,7 +293,7 @@ services:
       - "homepage.group=Management"
       - "homepage.name=Prowlarr (Indexers)"
       - "homepage.icon=prowlarr.png"
-      - "homepage.href=http://192.168.1.31:9696"
+      - "homepage.href=http://10.0.0.9:9696"
 
   radarr:
     image: lscr.io/linuxserver/radarr:latest
@@ -313,7 +313,7 @@ services:
       - "homepage.group=Media"
       - "homepage.name=Radarr (Movies)"
       - "homepage.icon=radarr.png"
-      - "homepage.href=http://192.168.1.31:7878"
+      - "homepage.href=http://10.0.0.9:7878"
 
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
@@ -333,7 +333,7 @@ services:
       - "homepage.group=Media"
       - "homepage.name=Sonarr (TV)"
       - "homepage.icon=sonarr.png"
-      - "homepage.href=http://192.168.1.31:8989"
+      - "homepage.href=http://10.0.0.9:8989"
 
   flaresolverr:
     image: ghcr.io/flaresolverr/flaresolverr:latest
@@ -367,7 +367,7 @@ services:
       - "homepage.group=Management"
       - "homepage.name=Lidarr (Music)"
       - "homepage.icon=lidarr.png"
-      - "homepage.href=http://192.168.1.31:8686"
+      - "homepage.href=http://10.0.0.9:8686"
 
   seerr:
     image: ghcr.io/seerr-team/seerr:latest
@@ -384,7 +384,7 @@ services:
       - "homepage.group=Management"
       - "homepage.name=Seerr (Requests)"
       - "homepage.icon=seerr.png"
-      - "homepage.href=http://192.168.1.31:5055"
+      - "homepage.href=http://10.0.0.9:5055"
 
   recyclarr:
     image: ghcr.io/recyclarr/recyclarr:8
@@ -416,7 +416,7 @@ services:
       - "homepage.group=Utilities"
       - "homepage.name=AdGuard Home"
       - "homepage.icon=adguard-home.png"
-      - "homepage.href=http://192.168.1.31"
+      - "homepage.href=http://10.0.0.9"
 
   minecraft:
     image: itzg/minecraft-server

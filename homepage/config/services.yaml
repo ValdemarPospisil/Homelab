@@ -1,57 +1,57 @@
 - Media:
     - Plex:
         icon: plex.png
-        href: http://192.168.1.31:32400/web
+        href: http://10.0.0.9:32400/web
   #      widget:
   #        type: plex
-  #        url: http://192.168.1.31:32400
+  #        url: http://10.0.0.9:32400
   #        key: "{{HOMEPAGE_VAR_PLEX_TOKEN}}"
 
     - Audiobookshelf:
         icon: audiobookshelf.png
-        href: http://192.168.1.31:13378
+        href: http://10.0.0.9:13378
         widget:
           type: audiobookshelf
-          url: http://192.168.1.31:13378
+          url: http://10.0.0.9:13378
           key: "{{HOMEPAGE_VAR_AUDIOBOOKSHELF_KEY}}"
 
     - Kavita:
         icon: kavita.png
-        href: http://192.168.1.31:5000
+        href: http://10.0.0.9:5000
         widget:
           type: kavita
-          url: http://192.168.1.31:5000
+          url: http://10.0.0.9:5000
           username: "{{HOMEPAGE_VAR_KAVITA_USER}}"
           password: "{{HOMEPAGE_VAR_KAVITA_PASSWORD}}"
 
 - Monitoring:
     - Grafana:
         icon: grafana.png
-        href: http://192.168.1.31:3002
+        href: http://10.0.0.9:3002
         widget:
           type: grafana
-          url: http://192.168.1.31:3002
+          url: http://10.0.0.9:3002
           username: "{{HOMEPAGE_VAR_GRAFANA_USER}}"
           password: "{{HOMEPAGE_VAR_GRAFANA_PASSWORD}}"
 
     - Prometheus:
         icon: prometheus.png
-        href: http://192.168.1.31:9090
+        href: http://10.0.0.9:9090
         widget:
           type: prometheus
-          url: http://192.168.1.31:9090
+          url: http://10.0.0.9:9090
 
     - Uptime Kuma:
         icon: uptime-kuma.png
-        href: http://192.168.1.31:3001
+        href: http://10.0.0.9:3001
         widget:
           type: uptimekuma
-          url: http://192.168.1.31:3001
+          url: http://10.0.0.9:3001
           slug: default
 
     - Logs (Dozzle):
         icon: dozzle.png
-        href: http://192.168.1.31:8080
+        href: http://10.0.0.9:8080
 
 - Infrastructure:
     - Docker:
@@ -64,19 +64,19 @@
         icon: watchtower.png
         widget:
           type: watchtower
-          url: http://192.168.1.31:8081
+          url: http://10.0.0.9:8081
           key: moje_tajne_token_123
 
     - FileBrowser:
         icon: filebrowser.png
-        href: http://192.168.1.31:8082
+        href: http://10.0.0.9:8082
 
     - AdGuard Home:
         icon: adguard-home.png
-        href: http://192.168.1.31:80
+        href: http://10.0.0.9:80
   #      widget:
   #        type: adguard
-  #        url: http://192.168.1.31:80
+  #        url: http://10.0.0.9:80
   #        username: "{{HOMEPAGE_VAR_ADGUARD_USER}}"
   #        password: "{{HOMEPAGE_VAR_ADGUARD_PASSWORD}}"
 
