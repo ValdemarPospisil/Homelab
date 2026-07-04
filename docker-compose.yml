@@ -429,7 +429,7 @@ services:
       - ./immich/upload:/usr/src/app/upload
       - /etc/localtime:/etc/localtime:ro
     env_file:
-      - ./immich/.env
+      - ./immich/immich.env
     ports:
       - "2283:3001"
     depends_on:
@@ -448,7 +448,7 @@ services:
     volumes:
       - ./immich/model-cache:/cache
     env_file:
-      - ./immich/.env
+      - ./immich/immich.env
     restart: always
 
   immich-redis:
@@ -504,7 +504,7 @@ services:
       - EULA=TRUE
       - TYPE=FABRIC
       - VERSION=1.21.1
-      - MEMORY=7G
+      - MEMORY=3G
       - MOTD=Kingdom
       - DIFFICULTY=normal
       - MAX_PLAYERS=10
