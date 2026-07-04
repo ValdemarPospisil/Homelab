@@ -277,6 +277,25 @@ services:
       - "homepage.href=http://10.0.0.9:8090"
 
   # --- MANAGEMENT (ARR STACK) ---
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Prague
+    volumes:
+      - ./bazarr/config:/config
+      - ./media:/data
+    ports:
+      - "6767:6767"
+    restart: unless-stopped
+    labels:
+      - "homepage.group=Management"
+      - "homepage.name=Bazarr (Subtitles)"
+      - "homepage.icon=bazarr.png"
+      - "homepage.href=http://10.0.0.9:6767"
+
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
@@ -400,6 +419,62 @@ services:
       - "homepage.group=Management"
       - "homepage.name=Recyclarr"
       - "homepage.icon=recyclarr.png"
+
+  # --- IMMICH ---
+  immich-server:
+    container_name: immich_server
+    image: ghcr.io/immich-app/immich-server:release
+    command: [ "start.sh", "immich" ]
+    volumes:
+      - ./immich/upload:/usr/src/app/upload
+      - /etc/localtime:/etc/localtime:ro
+    env_file:
+      - ./immich/.env
+    ports:
+      - "2283:3001"
+    depends_on:
+      - immich-redis
+      - immich-postgres
+    restart: always
+    labels:
+      - "homepage.group=Media"
+      - "homepage.name=Immich"
+      - "homepage.icon=immich.png"
+      - "homepage.href=http://10.0.0.9:2283"
+
+  immich-machine-learning:
+    container_name: immich_machine_learning
+    image: ghcr.io/immich-app/immich-machine-learning:release
+    volumes:
+      - ./immich/model-cache:/cache
+    env_file:
+      - ./immich/.env
+    restart: always
+
+  immich-redis:
+    container_name: immich_redis
+    image: docker.io/redis:6.2-alpine@sha256:4a0889cbfbd3aebcb1562e1a38a719c8f07cc1364506c83ef07e329007fbc0a2
+    healthcheck:
+      test: redis-cli ping || exit 1
+    restart: always
+
+  immich-postgres:
+    container_name: immich_postgres
+    image: docker.io/tensorchord/pgvecto-rs:pg14-v0.2.0@sha256:90724186f0a3517cf6914295b5ab410db9ce23190a2d9d0b9dd6463e3fa298f0
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_USER: ${DB_USERNAME:-postgres}
+      POSTGRES_DB: ${DB_DATABASE_NAME:-immich}
+      POSTGRES_INITDB_ARGS: '--data-checksums'
+    volumes:
+      - ./immich/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: pg_isready -dbname='${DB_DATABASE_NAME:-immich}' -U '${DB_USERNAME:-postgres}' || exit 1; Chksum="$$(psql -dbname='${DB_DATABASE_NAME:-immich}' -U '${DB_USERNAME:-postgres}' -t -A -c 'SHOW data_checksums;');" if [ "$$Chksum" = "on" ]; then exit 0; else exit 1; fi
+      interval: 5m
+      start_interval: 30s
+      start_period: 5m
+    command: ["postgres", "-c" ,"shared_preload_libraries=vectors.so", "-c", 'search_path="$$user", public, vectors', "-c", "logging_collector=on", "-c", "max_wal_size=2GB", "-c", "shared_buffers=512MB", "-c", "wal_compression=on"]
+    restart: always
 
   # --- SPECIAL ---
   adguardhome:
